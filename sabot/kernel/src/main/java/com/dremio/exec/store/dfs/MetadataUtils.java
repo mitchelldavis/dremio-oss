@@ -95,6 +95,7 @@ public class MetadataUtils {
     final PartitionValue partitionValue = new PartitionValue();
     partitionValue.setColumn(column.getAsUnescapedPath());
     switch (type) {
+      case SMALLINT:
       case INT:
       case TIME:
       case INTERVALYEAR:
@@ -285,7 +286,7 @@ public class MetadataUtils {
           rangeQueryInput = new RangeQueryInput(((BigDecimal) literal.getValue()).doubleValue(), filter.getKind());
           matchingSplitsQuery = SearchQueryUtils.newRangeDouble(columnKey, (Double) rangeQueryInput.min, (Double) rangeQueryInput.max, rangeQueryInput.includeMin, rangeQueryInput.includeMax);
           break;
-
+        case SMALLINT:
         case INT:
           rangeQueryInput = new RangeQueryInput(((BigDecimal) literal.getValue()).setScale(0, BigDecimal.ROUND_HALF_UP).intValue(), filter.getKind());
           matchingSplitsQuery = SearchQueryUtils.newRangeInt(columnKey, (Integer) rangeQueryInput.min, (Integer) rangeQueryInput.max, rangeQueryInput.includeMin, rangeQueryInput.includeMax);
